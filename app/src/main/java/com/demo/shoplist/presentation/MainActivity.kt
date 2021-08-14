@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.demo.shoplist.R
 
 class MainActivity : AppCompatActivity() {
-    lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.shopList.observe(this, Observer {
             Log.d("MainActivityTest", it.toString())
         })
-        viewModel.getShopList()
 
     }
 }
