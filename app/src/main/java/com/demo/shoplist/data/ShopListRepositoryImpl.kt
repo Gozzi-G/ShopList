@@ -8,9 +8,10 @@ import java.lang.RuntimeException
 
 object ShopListRepositoryImpl : ShopListRepository {
 
-    private val shopList = mutableListOf<ShopItem>()
+    private val shopList = sortedSetOf<ShopItem>(
+        { o1, o2 -> o1.id.compareTo(o2.id) }
+    )
     private val shopListFromLiveData = MutableLiveData<List<ShopItem>>()
-
     private var autoIncrementId = 0
 
     init {
@@ -21,7 +22,7 @@ object ShopListRepositoryImpl : ShopListRepository {
     }
 
     override fun addShopItem(shopItem: ShopItem) {
-        if (shopItem.id == ShopItem.UNDEFINED_ID ) {
+        if (shopItem.id == ShopItem.UNDEFINED_ID) {
             shopItem.id = autoIncrementId++
         }
         shopList.add(shopItem)
