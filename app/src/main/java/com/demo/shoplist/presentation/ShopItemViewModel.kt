@@ -9,6 +9,7 @@ import java.lang.Exception
 
 class ShopItemViewModel : ViewModel() {
     private val repository = ShopListRepositoryImpl
+
     private val getShopItemUseCase = GetShopItemUseCase(repository)
     private val addShopItemUseCase = AddShopItemUseCase(repository)
     private val editShopItemUseCase = EditShopItemUseCase(repository)
@@ -29,9 +30,8 @@ class ShopItemViewModel : ViewModel() {
     val shouldCloseScreen: LiveData<Unit>
         get() = _shouldCloseScreen
 
-
-    fun getShopItem(shopItem: Int) {
-        val item = getShopItemUseCase.getShopItem(shopItem)
+    fun getShopItem(shopItemId: Int) {
+        val item = getShopItemUseCase.getShopItem(shopItemId)
         _shopItem.value = item
     }
 
@@ -84,11 +84,11 @@ class ShopItemViewModel : ViewModel() {
         return result
     }
 
-    private fun resetErrorInputName() {
+    fun resetErrorInputName() {
         _errorInputName.value = false
     }
 
-    private fun resetErrorInputCount() {
+    fun resetErrorInputCount() {
         _errorInputCount.value = false
     }
 
