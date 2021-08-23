@@ -3,11 +3,11 @@ package com.demo.shoplist.presentation
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.shoplist.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
@@ -18,9 +18,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setUpRecyclerView()
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.shopList.observe(this, Observer {
+        viewModel.shopList.observe(this) {
             shopListAdapter.submitList(it)
-        })
+        }
+        val buttonAddItem = findViewById<FloatingActionButton>(R.id.button_add_shop_item)
+        buttonAddItem.setOnClickListener {
+            val intent = ShopItemActivity.newIntentAddItem(this)
+            startActivity(intent)
+        }
     }
 
     private fun setUpRecyclerView() {
@@ -50,6 +55,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupItemShortClickListener() {
         shopListAdapter.onShopClickListener = {
             Log.d("test_click", "click ${it.id}")
+            val intent = ShopItemActivity.newIntentEditItem(this, it.id)
+            startActivity(intent)
         }
     }
 
