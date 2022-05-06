@@ -2,9 +2,9 @@ package com.demo.shoplist.presentation
 
 import androidx.lifecycle.ViewModel
 import com.demo.shoplist.data.ShopListRepositoryImpl
-import com.demo.shoplist.domain.DeleteShopItemUseCase
-import com.demo.shoplist.domain.EditShopItemUseCase
-import com.demo.shoplist.domain.GetShopListItemUseCase
+import com.demo.shoplist.domain.use_cases.DeleteShopItemUseCase
+import com.demo.shoplist.domain.use_cases.EditShopItemUseCase
+import com.demo.shoplist.domain.use_cases.GetShopListItemUseCase
 import com.demo.shoplist.domain.ShopItem
 
 class MainViewModel: ViewModel() {

@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.shoplist.R
+import com.demo.shoplist.presentation.shop_item.ShopItemActivity
+import com.demo.shoplist.presentation.shop_item.ShopItemFragment
+import com.demo.shoplist.presentation.adapter.ShopListAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {

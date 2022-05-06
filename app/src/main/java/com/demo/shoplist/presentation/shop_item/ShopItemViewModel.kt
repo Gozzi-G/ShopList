@@ -1,10 +1,13 @@
-package com.demo.shoplist.presentation
+package com.demo.shoplist.presentation.shop_item
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.demo.shoplist.data.ShopListRepositoryImpl
 import com.demo.shoplist.domain.*
+import com.demo.shoplist.domain.use_cases.AddShopItemUseCase
+import com.demo.shoplist.domain.use_cases.EditShopItemUseCase
+import com.demo.shoplist.domain.use_cases.GetShopItemUseCase
 import java.lang.Exception
 
 class ShopItemViewModel : ViewModel() {

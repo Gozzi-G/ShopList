@@ -1,11 +1,9 @@
-package com.demo.shoplist.presentation
+package com.demo.shoplist.presentation.shop_item
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -123,7 +121,7 @@ class ShopItemFragment() : Fragment() {
             etCount.setText(it.count.toString())
         }
         buttonSave.setOnClickListener {
-            viewModel.editShopItem(etName.text?.toString(), etCount.text?.toString())
+            viewModel.editShopItem(etName.text?.toString() ?: "", etCount.text?.toString() ?: "")
         }
     }
 
@@ -178,14 +176,6 @@ class ShopItemFragment() : Fragment() {
                     putString(SCREEN_MODE, MODE_ADD)
                 }
             }
-
-//            val args = Bundle().apply {
-//                putString(SCREEN_MODE, MODE_ADD)
-//            }
-//            val fragment = ShopItemFragment().apply {
-//                arguments = args
-//            }
-//            return fragment
         }
 
         fun newInstanceEditItem(shopItemId: Int): ShopItemFragment {
@@ -196,18 +186,5 @@ class ShopItemFragment() : Fragment() {
                 }
             }
         }
-
-//        fun newIntentAddItem(context: Context): Intent {
-//            val intent = Intent(context, ShopItemActivity::class.java)
-//            intent.putExtra(SCREEN_MODE, MODE_ADD)
-//            return intent
-//        }
-//
-//        fun newIntentEditItem(context: Context, shopItemId: Int): Intent {
-//            val intent = Intent(context, ShopItemActivity::class.java)
-//            intent.putExtra(SCREEN_MODE, MODE_EDIT)
-//            intent.putExtra(SHOP_ITEM_ID, shopItemId)
-//            return intent
-//        }
     }
 }
