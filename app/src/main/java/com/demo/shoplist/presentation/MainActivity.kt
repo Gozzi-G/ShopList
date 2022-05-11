@@ -1,8 +1,6 @@
 package com.demo.shoplist.presentation
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -44,7 +42,6 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
 
 
     override fun onEditFinished() {
-        Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_LONG).show()
         supportFragmentManager.popBackStack()
     }
 
@@ -62,7 +59,19 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
 
     private fun setUpRecyclerView() {
         val rvShopList = binding.rvShopList
-        shopListAdapter = ShopListAdapter()
+        shopListAdapter = ShopListAdapter(
+            onLongItemClickListener = {
+                viewModel.changeEnableState(it)
+            },
+            onItemClickListener = {
+                if (isOnePaneMode()) {
+                    val intent = ShopItemActivity.newIntentEditItem(this, it.id)
+                    startActivity(intent)
+                } else {
+                    launchFragment(ShopItemFragment.newInstanceEditItem(it.id))
+                }
+            }
+        )
         rvShopList.adapter = shopListAdapter
         rvShopList.recycledViewPool.setMaxRecycledViews(
             ShopListAdapter.VIEW_TYPE_ENABLED,
@@ -72,28 +81,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
             ShopListAdapter.VIEW_TYPE_DISABLED,
             ShopListAdapter.MAX_POOL_SIZE
         )
-        setupLongClickListener()
-        setupItemShortClickListener()
         setupSwipeListener(rvShopList)
-    }
-
-
-    private fun setupLongClickListener() {
-        shopListAdapter.onShopItemClickListener = {
-            viewModel.changeEnableState(it)
-        }
-    }
-
-    private fun setupItemShortClickListener() {
-        shopListAdapter.onShopClickListener = {
-            if (isOnePaneMode()) {
-                Log.d("test_click", "click ${it.id}")
-                val intent = ShopItemActivity.newIntentEditItem(this, it.id)
-                startActivity(intent)
-            } else {
-                launchFragment(ShopItemFragment.newInstanceEditItem(it.id))
-            }
-        }
     }
 
     private fun setupSwipeListener(rvShopList: RecyclerView?) {
