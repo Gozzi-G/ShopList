@@ -16,7 +16,10 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
+
     lateinit var shopListAdapter: ShopListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +27,9 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
         binding = ActivityMainBinding.inflate(layoutInflater).also {
             setContentView(it.root)
         }
+
         setUpRecyclerView()
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
         viewModel.shopList.observe(this) {
             shopListAdapter.submitList(it)
         }
