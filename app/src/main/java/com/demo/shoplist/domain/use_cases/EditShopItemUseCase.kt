@@ -5,6 +5,6 @@ import com.demo.shoplist.domain.ShopListRepository
 
 class EditShopItemUseCase(private val shopListRepository: ShopListRepository) {
     fun editShopItem(shopItem: ShopItem) {
-        shopListRepository.editShopItemUseCase(shopItem)
+        shopListRepository.editShopItem(shopItem)
     }
 }
